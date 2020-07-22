@@ -75,29 +75,17 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<plugins>
-			<plugin>
-			  <groupId>com.spotify</groupId>
-			  <artifactId>docker-maven-plugin</artifactId>
-			  <version>0.4.13</version>
-			  <configuration>
-			    <imageName>desafiotecnico</imageName>
-			    <baseImage>frolvlad/alpine-oraclejdk8:slim</baseImage>
-			    <entryPoint>["sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -jar /${project.build.finalName}.jar --spring.profiles.active=${spring.profile}"]
-			    </entryPoint>
-			    <resources>
-			        <resource>
-			            <targetPath>/</targetPath>
-			            <directory>${project.build.directory}</directory>
-			            <include>${project.build.finalName}.jar</include>
-			        </resource>
-			    </resources>
-			    <imageTags>
-			        <imageTag>${project.version}</imageTag>
-			        <imageTag>latest</imageTag>
-			    </imageTags>
-			  </configuration>
-			</plugin>
-		</plugins>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.4.0</version>
+                <configuration>
+                    <to>
+                        <image>desafiotecnico</image>
+                    </to>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
