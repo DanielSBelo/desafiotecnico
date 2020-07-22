@@ -36,6 +36,25 @@ public class Pessoas implements Serializable{
 	
 	private Date data_atualizacao;
 
+	public Pessoas() {
+		super();
+	}
+
+	public Pessoas(String nome, String sexo, String email, String endereco, String data_nascimento, String naturalidade,
+			String nacionalidade, String cpf, Date data_cadastro, Date data_atualizacao) {
+		super();
+		this.nome = nome;
+		this.sexo = sexo;
+		this.email = email;
+		this.endereco = endereco;
+		this.data_nascimento = data_nascimento;
+		this.naturalidade = naturalidade;
+		this.nacionalidade = nacionalidade;
+		this.cpf = cpf;
+		this.data_cadastro = data_cadastro;
+		this.data_atualizacao = data_atualizacao;
+	}
+
 	public Integer getId_pessoas() {
 		return id_pessoas;
 	}
