@@ -1,26 +1,20 @@
 version: '3'
 services:
   desafiotecnico:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    image: desafiotecnico/api
+    image: danielsbelo/desafiotecnico
     ports:
       - '8080:8080'
-      - '5005:5005'
-    environment: 
-      - ADDITIONAL_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=:8080 -Xms2048m -XX:MaxMetaspaceSize=2048m
-      - PROFILE=dev
-    links: 
-      - db
-  db:
-    image: mysql:8.0.21
-    ports:
-      - '3306:3306'
-    environment: 
-      - MYSQL_ROOT_HOST=%
+    networks:
+      - desafio-network
+    depends_on:
+      - desafiotecnico
+  desafiotecnico:
+    image: mysql:8
+    networks:
+      - desafio-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=desafiotecnico
-      - MYSQL_PASSWORD=password
       - MYSQL_ALLOW_EMPTY_PASSWORD=no
-    volumes:
-      - ./docker/volume_mysql:/var/lib/mysql
+networks:
+  desafio-network:
